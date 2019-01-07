@@ -1,5 +1,6 @@
-<h1>this is a homepage for user log gin</h1>
+{% extends "base.html" %}
 
+{% block content %}
     <p>
         <form method="POST">
             <label for="username">Username:</label>
@@ -7,3 +8,4 @@
             <button>Let's solvesome riddles!</button>
         </form>
     </p>
+{% endblock %}

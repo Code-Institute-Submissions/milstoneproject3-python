@@ -1,1 +1,16 @@
-<h1>riddles page</h1>
+{% extends "base.html" %}
+
+{% block content %}
+
+    <h1>Riddles Pages</h1>
+
+{% for record in data %}
+
+{{ loop.index }} {{ record.riddle }}
+
+
+{% endfor %}
+
+<a href="{{ url_for('leaderboard') }}">Leaderboard</a>
+<a href="{{ url_for('settings') }}">Settings</a>
+{% endblock %}
