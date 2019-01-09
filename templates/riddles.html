@@ -1,16 +1,44 @@
-{% extends "base.html" %}
-
+{% extends "base.html" %} 
 {% block content %}
 
-    <h1>Riddles Pages</h1>
+<h1>Riddles Pages - you are logged in as {{ username }}</h1>
 
 {% for record in data %}
 
-{{ loop.index }} {{ record.riddle }}
-
+<div class="container riddle">
+    <div class="row">
+        {{ loop.index }} {{ record.riddle }}
+    </div>
+    <div class="row user-answer">
+        <form method="POST">
+            {% set index = [0] %}
+            <textarea cols="50" rows="4" name="answer", id="answer"></textarea>
+            <br>
+            <button>Submit Answer</button>
+        </form>
+    </div>
+    <div class="row answer-hide">
+        {{ loop.index }} {{ record.answer }}
+    </div>
+    <br>
+</div>
 
 {% endfor %}
 
+<br>
+<h2>Correct: {{ correct }}</h2>
+<h2>Incorrect: {{ incorrect }}</h2>
+<br>
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for message in messages %}
+      <li>{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+<br>
+
 <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
-<a href="{{ url_for('settings') }}">Settings</a>
-{% endblock %}
+<a href="{{ url_for('settings') }}">Settings</a> {% endblock %}

@@ -1,18 +1,8 @@
    [{
-           "riddle": "What question can someone ask all day long, always get totally different answers, and yet all the answers could be correct?",
-           "answer": "What time is it?"
-       },
-       {
-           "riddle": "How can you smell if you don’t have a nose?",
-           "answer": "Dont take a shower"
-       },
-       {
-           "riddle": "Which tire does not move when a car turns right?",
-           "answer": "The spare tire"
-       },
-       {
-           "riddle": "A man is lying shot on the road. The police come to investigate. Right away, they know who shot him. Why?",
-           "answer": "He is only shot, not dead"
-       }
-   ]
+       "riddle": "What question can someone ask all day long, always get totally different answers, and yet all the answers could be correct?",
+       "answer": "What time is it?"
+   }, {
+       "riddle": "How can you smell if you don’t have a nose?",
+       "answer": "Dont take a shower"
+   }]
    
