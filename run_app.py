@@ -31,14 +31,14 @@ def riddles ():
         select_riddle = random.choice(riddles_dict)
         
     #checking for correct/incorrect answers    
-    if request.method == "POST":
-        user_anwser = request.form["answer"]
-        if user_anwser == riddles_dict[request.form["index"]]["answer"]:
-            correct =+ 1
-            flash(user_anwser +" Right")
-        else:
-            incorrect =+ 1
-            flash(user_anwser +" Wrong")
+    #if request.method == "POST":
+    #    user_anwser = request.form["answer"]
+    #    if user_anwser == select_riddle[0]["answer"]:
+    #        correct =+ 1
+    #        flash(user_anwser +" Right")
+    #    else:
+    #        incorrect =+ 1
+    #        flash(user_anwser +" Wrong")
         
     
     return render_template("riddles.html", page_title ="Here are your riddles", data = select_riddle, correct=correct, incorrect=incorrect, username=session["username"])

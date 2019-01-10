@@ -1,5 +1,4 @@
-{% extends "base.html" %} 
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
 <h1>Riddles Pages - you are logged in as {{ username }}</h1>
 
@@ -9,9 +8,9 @@
     </div>
     <div class="row user-answer">
         <form method="POST">
-            <textarea cols="50" rows="4" name="answer", id="answer"></textarea>
+            <textarea cols="50" rows="4" name="answer" , id="answer"></textarea>
             <br>
-            <button>Submit Answer</button>
+            <button onclick="checkAnwser('{{ data.answer }}')">Submit Answer</button>
         </form>
     </div>
     <div class="row answer-hide">
@@ -20,22 +19,21 @@
     <br>
 </div>
 
-
-
-<br>
-<h2>Correct: {{ correct }}</h2>
-<h2>Incorrect: {{ incorrect }}</h2>
-<br>
-{% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-<br>
+<script>
+    var correct = 0;
+    var incorrect = 0;
+    function checkAnwser(riddle_answer) {
+        var user_answer = document.getElementById('answer').value
+        if (user_answer == riddle_answer) {
+            return "<h4>Correct</h4>"
+            correct =+ 1
+        }
+        else {
+            return "<h4>incorrect</h4>"
+            incorrect =+ 0
+        };
+    }
+</script>
 
 <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
 <a href="{{ url_for('settings') }}">Settings</a> {% endblock %}
