@@ -25,10 +25,11 @@ def riddles ():
     correct = 0
     incorrect = 0
     
-    #load data
+    #load data and select a random riddle 
     with open("data/riddles.json","r") as json_data:
         riddles_dict = json.load(json_data)
-    
+        select_riddle = random.choice(riddles_dict)
+        
     #checking for correct/incorrect answers    
     if request.method == "POST":
         user_anwser = request.form["answer"]
@@ -40,7 +41,7 @@ def riddles ():
             flash(user_anwser +" Wrong")
         
     
-    return render_template("riddles.html", page_title ="Here are your riddles", data = riddles_dict, correct=correct, incorrect=incorrect, username=session["username"])
+    return render_template("riddles.html", page_title ="Here are your riddles", data = select_riddle, correct=correct, incorrect=incorrect, username=session["username"])
 
 @app.route("/leaderboard")
 # route to leaderboard
