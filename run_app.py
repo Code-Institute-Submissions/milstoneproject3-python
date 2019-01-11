@@ -6,6 +6,20 @@ from flask import Flask, render_template,request, session, url_for, redirect, fl
 app = Flask(__name__)
 app.secret_key = ("this is super secret")
 
+# function to check user answers and keep count of correct and incorrect answers
+def checkAnswer(user_input, system_answer):
+    if user_input == system_answer:
+        global correct
+        correct += 1
+    else:
+        global incorrect
+        incorrect += 1
+    return "Correct: {} - Incorrect: {}".format(correct,incorrect)
+    
+# global variables
+correct = 0
+incorrect = 0
+
 @app.route("/", methods=["GET","POST"])
 #  route to homepage
 def index():
@@ -22,26 +36,22 @@ def index():
 # displayed riddle page with riddle data
 def riddles ():
     riddles_dict=[]
-    correct = 0
-    incorrect = 0
+    user_anwser = []
+    score = ""
     
-    #load data and select a random riddle 
+    #load data and select a random riddle to display to the user
     with open("data/riddles.json","r") as json_data:
         riddles_dict = json.load(json_data)
         select_riddle = random.choice(riddles_dict)
-        
-    #checking for correct/incorrect answers    
-    #if request.method == "POST":
-    #    user_anwser = request.form["answer"]
-    #    if user_anwser == select_riddle[0]["answer"]:
-    #        correct =+ 1
-    #        flash(user_anwser +" Right")
-    #    else:
-    #        incorrect =+ 1
-    #        flash(user_anwser +" Wrong")
-        
+        system_answer = select_riddle["answer"]
     
-    return render_template("riddles.html", page_title ="Here are your riddles", data = select_riddle, correct=correct, incorrect=incorrect, username=session["username"])
+    # checking for correct/incorrect answers    
+    if request.method == "POST":
+        user_anwser = request.form["user_input"]
+        system_answer = select_riddle["answer"]
+        score = checkAnswer(user_anwser, system_answer)
+        
+    return render_template("riddles.html", page_title ="Here are your riddles", data = select_riddle, score = score, username=session["username"], system_answer = system_answer)
 
 @app.route("/leaderboard")
 # route to leaderboard

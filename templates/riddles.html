@@ -6,11 +6,11 @@
     <div class="row">
         {{ data.riddle }}
     </div>
-    <div class="row user-answer">
+    <div class="row user_answer">
         <form method="POST">
-            <textarea cols="50" rows="4" name="answer" , id="answer"></textarea>
+            <textarea cols="50" rows="4" name="user_input" , id="user_input"></textarea>
             <br>
-            <button onclick="checkAnwser('{{ data.answer }}')">Submit Answer</button>
+            <button>Submit Answer</button>
         </form>
     </div>
     <div class="row answer-hide">
@@ -18,22 +18,12 @@
     </div>
     <br>
 </div>
-
-<script>
-    var correct = 0;
-    var incorrect = 0;
-    function checkAnwser(riddle_answer) {
-        var user_answer = document.getElementById('answer').value
-        if (user_answer == riddle_answer) {
-            return "<h4>Correct</h4>"
-            correct =+ 1
-        }
-        else {
-            return "<h4>incorrect</h4>"
-            incorrect =+ 0
-        };
-    }
-</script>
+<h4>Score: </h4>{{ score }}
+<br>
+<br>
+<h4> System Answer: </h4>{{ system_answer }}
+<br>
+<br>
 
 <a href="{{ url_for('leaderboard') }}">Leaderboard</a>
 <a href="{{ url_for('settings') }}">Settings</a> {% endblock %}
