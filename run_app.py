@@ -8,10 +8,10 @@ app.secret_key = ("this is super secret")
 
 
 # function to check user answers and keep count of correct and incorrect answers
-def checkAnswer(user_input, system_answer, session_user):
+def checkAnswer(user_anwser, system_answer, session_user):
     if "username" in session:
-        if user_input == system_answer:
-            session["correct"] =+ 1
+        if user_anwser.lower() in str(system_answer.lower()):
+            session["correct"] += 1
         else:
             session["incorrect"] += 1
     return "Correct: {} - Incorrect: {} for session user {}".format(session["correct"], session["incorrect"], session_user)
@@ -45,11 +45,11 @@ def riddles ():
     
     # checking for correct/incorrect answers    
     if request.method == "POST":
-        user_anwser = request.form["user_input"]
-        system_answer = select_riddle["answer"]
+        user_anwser = request.form["user_input"].replace(" ", "")
+        system_answer = select_riddle["answer"].replace(" ", "")
 
         score = checkAnswer(user_anwser, system_answer, session["username"])
-        
+   
     return render_template("riddles.html", page_title ="Here are your riddles", data = select_riddle, score = score, username=session["username"], system_answer = system_answer)
 
 @app.route("/leaderboard")
