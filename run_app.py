@@ -14,7 +14,16 @@ def checkAnswer(user_anwser, system_answer, session_user):
             session["correct"] += 1
         else:
             session["incorrect"] += 1
+            
+    leader(session["username"], session["correct"], session["incorrect"])
+    
     return "Correct: {} - Incorrect: {} for session user {}".format(session["correct"], session["incorrect"], session_user)
+
+# Add to leaderboard
+def leader(user, correct, incorrect):
+    with open("data/leaderboard.json","a") as leader_data:
+        score = {"username": user,"correct": correct, "incorrect": incorrect}
+        leader_data.write(json.dumps(score))
 
 @app.route("/", methods=["GET","POST"])
 #  route to homepage
