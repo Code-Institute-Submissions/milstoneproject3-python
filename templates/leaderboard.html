@@ -6,7 +6,10 @@
 <h1>this is a leader board page</h1>
 <br>
 
-{{ all_users }}
-
+<h3>User - Correct - Incorrect</h3>
+{% for key in leader_list %}
+    {{ key.user }} - {{ key.correct }} - {{ key.incorrect }}
+    <br>
+{% endfor %}
 
 {% endblock %}
