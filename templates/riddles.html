@@ -1,29 +1,35 @@
 {% extends "base.html" %} {% block content %}
 
-<h1>Riddles Pages - you are logged in as {{ username }}</h1>
+<div class="row">
+    <div class="col-sm-12">
+        <h2>Here is one of your riddles {{ username }}</h2>
 
-<div class="container riddle">
-    <div class="row">
-        {{ data.riddle }}
-    </div>
-    <div class="row user_answer">
-        <form method="POST">
-            <textarea cols="50" rows="4" name="user_input" , id="user_input"></textarea>
+        <div class="container riddle">
+            <div class="row">
+                {{ SelectRiddle }}
+            </div>
+            <div class="row user_answer">
+                <form method="POST">
+                    <textarea cols="50" rows="4" name="user_input" , id="user_input"></textarea>
+                    <br>
+                    <button class="btn submit-answer">Submit Answer</button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="row asnwer">
+            <button class="btn show-answer">Need the answer? Click here.</button>
             <br>
-            <button>Submit Answer</button>
-        </form>
-    </div>
-    <div class="row answer-hide">
-        {{ data.answer }}
-    </div>
-    <br>
-</div>
-<h4>Score: </h4>{{ score }}
-<br>
-<br>
-<h4> System Answer: </h4>{{ system_answer }}
-<br>
-<br>
+            <div class="row answer-hide">
+                {{ systemAnswer }}
+            </div>
+        </div>
 
-<a href="{{ url_for('leaderboard') }}">Leaderboard</a>
-<a href="{{ url_for('settings') }}">Settings</a> {% endblock %}
+        <div class="row score">
+            <h4>Score: </h4> {{ score }}
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -1,11 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <p>
+<div class="col-sm-12 set-login">
+    <div class="section login">
+            <p>
         <form method="POST">
-            <label for="username">Username:</label>
+            <label for="username">Enter your username</label>
+            <br>
             <input type="text" name="username" id="username"/>
-            <button>Let's solvesome riddles!</button>
+            <br>
+            <button class = "btn">Log in here and let's solvesome riddles!</button>
         </form>
     </p>
+    </div>
+</div>
+
 {% endblock %}
