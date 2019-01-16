@@ -79,6 +79,16 @@ def get_riddle(data):
         
     return random_riddle
         
+
+"""
+text input
+"""
+
+def input_text(text_to_check, user):
+    if not text_to_check:
+        return True
+    else:
+        return False
         
 """
 Routes to pages
@@ -89,12 +99,19 @@ def index():
     if request.method =="POST":
         session["username"] = request.form["username"]
         username = session["username"]
-        
+ 
     if "username" in session:
-        session["correct"] = 0
-        session["incorrect"] = 0
-        print("New user login: {}".format(username))
-        return redirect(url_for("riddles"))
+        if input_text(username, username) == True:
+            print("The username is empty")
+            flash('You need to enter a user name!.')
+            return render_template("index.html", page_title="Welcome to Riddles")
+        else:
+            print("the user is valid")
+        
+            session["correct"] = 0
+            session["incorrect"] = 0
+            print("New user login: {}".format(username))
+            return redirect(url_for("riddles"))
     else:
         return render_template("index.html", page_title="Welcome to Riddles")
 

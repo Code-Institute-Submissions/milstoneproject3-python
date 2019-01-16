@@ -223,10 +223,6 @@
          "answer": "A map"
       },
       {
-         "riddle": "What has hundreds of ears but can’t hear?",
-         "answer": "A corn field (it has ears of corn)"
-      },
-      {
          "riddle": "What did the boy coffee say to the girl coffee?",
          "answer": "I love you a latte"
       },
@@ -243,10 +239,6 @@
          "answer": "Pregnant!"
       },
       {
-         "riddle": "Why is an island like the letter “T”?",
-         "answer": "Because both are in the middle of the water. (T is the middle word of “water”)"
-      },
-      {
          "riddle": "What do you call a tick that loves math?",
          "answer": "A arithmetic"
       },
@@ -255,7 +247,7 @@
          "answer": "They might pickachu"
       },
       {
-         "riddle": "I’m often running yet I have no legs. You need me but I don’t need you. What am I?",
+         "riddle": "Im often running yet I have no legs. You need me but I dont need you. What am I?",
          "answer": "Water"
       }
    ]
