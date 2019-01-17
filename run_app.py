@@ -6,8 +6,9 @@ from flask import Flask, render_template,request, session, url_for, redirect, fl
 app = Flask(__name__)
 app.secret_key = ("this is super secret")
 
-# global variable to hold leaderboard
+# global variables
 leader_list = [{"user":"USERNAME", "correct":"1", "incorrect":"2"},{"user":"ANOTHERUSER", "correct":"10", "incorrect":"20"}]
+user_sessions = []
 
 """
 Fucntion to check of a users answer is correct or incorrect and update the leader board on the fly.
@@ -16,7 +17,7 @@ def checkAnswer(user_anwser, system_answer, username, leader_list):
     print("PreCheck user answer: {}").format(user_anwser)
     print("PreCheck sysem answer: {}").format(system_answer)
     
-    if user_anwser.lower() == str(system_answer.lower()):
+    if user_anwser.lower() == system_answer.lower():
         session["correct"] += 1
     else:
         session["incorrect"] += 1
@@ -81,15 +82,36 @@ def get_riddle(data):
         
 
 """
-text input
+text input, checking for nulls
 """
 
 def input_text(text_to_check, user):
     if not text_to_check:
+        print("The username is empty")
         return True
     else:
         return False
         
+        
+"""
+Detect duplicate users
+"""
+
+def duplicate_users(user_sessions):
+    i = 0
+    while i < len(user_sessions):
+        count = 0
+        n = 0
+        while n < len(user_sessions):
+            if user_sessions[i] == user_sessions[n]:
+                count += 1
+                print(count)
+                if count == 2:
+                    print("Duplicate user found: {}".format(user_sessions[n]))
+                    return True
+            n += 1
+        i += 1
+
 """
 Routes to pages
 """
@@ -99,15 +121,18 @@ def index():
     if request.method =="POST":
         session["username"] = request.form["username"]
         username = session["username"]
+        
+        global user_sessions
+        user_sessions.append(username)
  
     if "username" in session:
         if input_text(username, username) == True:
-            print("The username is empty")
-            flash('You need to enter a user name!.')
+            flash('You need to enter a user name')
+            return render_template("index.html", page_title="Welcome to Riddles")
+        elif duplicate_users(user_sessions) == True:
+            flash('A user with this name is already logged in')
             return render_template("index.html", page_title="Welcome to Riddles")
         else:
-            print("the user is valid")
-        
             session["correct"] = 0
             session["incorrect"] = 0
             print("New user login: {}".format(username))
