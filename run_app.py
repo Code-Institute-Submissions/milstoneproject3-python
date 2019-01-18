@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.secret_key = ("this is super secret")
 
 # global variables
-leader_list = [{"user":"USERNAME", "correct":"1", "incorrect":"2"},{"user":"ANOTHERUSER", "correct":"10", "incorrect":"20"}]
+leader_list = [{"user":"USERNAME", "correct":"1", "incorrect":"2"}]
 user_sessions = []
 
 """
@@ -92,7 +92,6 @@ def input_text(text_to_check, user):
     else:
         return False
         
-        
 """
 Detect duplicate users
 """
@@ -109,6 +108,7 @@ def duplicate_users(user_sessions):
                 print(count)
                 if count == 2:
                     print("Duplicate user found: {}".format(user_sessions[n]))
+                    user_sessions.remove(user_sessions[n])
                     return True
             n += 1
         i += 1
