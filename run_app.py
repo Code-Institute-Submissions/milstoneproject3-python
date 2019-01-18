@@ -98,6 +98,7 @@ Detect duplicate users
 """
 
 def duplicate_users(user_sessions):
+    # we are iterating over all user session usernames added to user_sessions global variable, and looking multiples instances of the same name being used.  Returns True if we find one
     i = 0
     while i < len(user_sessions):
         count = 0

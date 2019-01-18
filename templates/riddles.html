@@ -4,8 +4,8 @@
     <div class="col-sm-12">
         <h2>Here is one of your riddles {{ username }}</h2>
 
-        <div class="container riddle">
-            <div class="row">
+        <div class="riddle">
+            <div class="row new-riddle">
                 {{ SelectRiddle }}
             </div>
             <div class="row user_answer">
@@ -16,20 +16,27 @@
                 </form>
             </div>
         </div>
-        
-        <div class="row asnwer">
-            <button class="btn show-answer">Need the answer? Click here.</button>
-            <br>
-            <div class="row answer-hide">
-                {{ systemAnswer }}
-            </div>
-        </div>
-
-        <div class="row score">
-            <h4>Score: </h4> {{ score }}
-        </div>
-
     </div>
 </div>
+
+<div class="section hints">
+    <div class="col-sm-12">
+        <div class="row answer">
+            <button class="btn btn-sm btn-answer">Need the answer? Click here.</button>
+        </div>
+        <div class="row riddle-answer hidden">
+            {{ systemAnswer }}
+        </div>
+    </div>
+</div>
+
+<div class="section score">
+    <div class="col-sm-12">
+        <div class="row score">
+            <h5>Score: {{ score }}</h5> 
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}
