@@ -24,7 +24,7 @@ def checkAnswer(user_anwser, system_answer, username, leader_list):
             
     add_to_leaderboard(username, session["correct"], session["incorrect"], leader_list)
 
-    return "Correct: {} - Incorrect: {} for session user {}".format(session["correct"], session["incorrect"], username)
+    return "{}, you're current score is Correct: {} - Incorrect: {}".format(username, session["correct"], session["incorrect"])
 
 """
 functions that add and remove records from the leaderboard.  
@@ -105,7 +105,6 @@ def duplicate_users(user_sessions):
         while n < len(user_sessions):
             if user_sessions[i] == user_sessions[n]:
                 count += 1
-                print(count)
                 if count == 2:
                     print("Duplicate user found: {}".format(user_sessions[n]))
                     user_sessions.remove(user_sessions[n])
@@ -120,7 +119,7 @@ Routes to pages
 #  route to homepage
 def index():
     if request.method =="POST":
-        session["username"] = request.form["username"]
+        session["username"] = request.form["username"].encode('utf-8', 'ignore').decode('utf-8')
         username = session["username"]
         
         global user_sessions
@@ -157,7 +156,7 @@ def riddles ():
     
     # checking for correct/incorrect answers    
     if request.method == "POST":
-        user_anwser = request.form["user_input"]
+        user_anwser = request.form["user_input"].encode('utf-8', 'ignore').decode('utf-8')
         answer_to_check = random_riddle["answer"]
         username = session["username"]
         
