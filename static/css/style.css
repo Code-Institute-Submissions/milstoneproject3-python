@@ -36,18 +36,23 @@ form {
     text-align: center;
 }
 
+textarea {
+    width: 300px;
+}
+
 .btn-answer,
-.riddle-answer {
-    margin-left: 24%;
-    margin-right: 24%;
+.riddle-answer,
+.answer {
+    display: flex;
+    align-items: center;
+    justify-content: center
 }
 
 .btn-sm {
-    font-size: 8px;
-    padding: 15px 45px;
+    font-size: 10px;
 }
 
-.hidden{
+.hidden {
     display: none;
 }
 
@@ -58,8 +63,8 @@ score {
 /* leaderboard styles*/
 
 .leader-table {
-    margin-left: 10%;
-    margin-right: 10%;
+    width: 100%;
+    text-align: center;
 }
 
 th,

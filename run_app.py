@@ -6,7 +6,7 @@ app = Flask(__name__)
 app.secret_key = ("this is super secret")
 
 # global variables
-leader_list = [{"user":"USERNAME", "correct":"1", "incorrect":"2"}]
+leader_list = [{"user":"Joe Blogs", "correct":"0", "incorrect":"0"}]
 user_sessions = []
 random_riddle = []
 
@@ -14,6 +14,7 @@ random_riddle = []
 Fucntion to check of a users answer is correct or incorrect and update the leader board on the fly.
 """
 def checkAnswer(user_anwser, system_answer, username, leader_list):
+    print("UserAnswer: {} - SystemAnswer: {}".format(user_anwser, system_answer ))
 
     if user_anwser.lower() == system_answer.lower():
         session["correct"] += 1
@@ -89,7 +90,7 @@ def duplicate_users(user_sessions):
         count = 0
         n = 0
         while n < len(user_sessions):
-            if user_sessions[i] == user_sessions[n]:
+            if user_sessions[i].lower() == user_sessions[n].lower():
                 count += 1
                 if count == 2:
                     user_sessions.remove(user_sessions[n])
@@ -111,7 +112,8 @@ def index():
         if input_text(username, username) == True:
             flash('You need to enter a user name')
             return redirect(url_for("index"))
-        elif duplicate_users(user_sessions) == True:
+        user_sessions.append(username)
+        if duplicate_users(user_sessions) == True:
             flash('A user with this name is already logged in')
             return redirect(url_for("index"))
         
@@ -125,9 +127,9 @@ def riddles ():
     user_anwser = []
     score = ""
     if request.method =="POST":
-        user_anwser = request.form.get("user_input", "")
+        user_anwser = request.form.get("user_input", "").replace(" ", "")
         
-        answer_to_check = random_riddle["answer"].replace(" ", "").lower()
+        answer_to_check = random_riddle["answer"].replace(" ", "")
         
         username = session["username"]
         
@@ -137,6 +139,7 @@ def riddles ():
     
     global random_riddle
     random_riddle = get_riddle()
+    print("Generate new riddle {}".format(random_riddle))
     return render_template("riddles.html", page_title="Here are your riddles",  score = score, username=session["username"], SelectRiddle = random_riddle["riddle"], systemAnswer = random_riddle["answer"])
 
 @app.route("/leaderboard")
