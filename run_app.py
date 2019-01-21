@@ -148,4 +148,4 @@ def riddles ():
 def leaderboard():
     return render_template("leaderboard.html", page_title="Riddles Leaderboard", leader_list=leader_list)
 
-app.run(host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT","5000")), debug=True)
+app.run(host=os.getenv("IP", "0.0.0.0"), port=int(os.getenv("PORT","5000")), debug=False)
