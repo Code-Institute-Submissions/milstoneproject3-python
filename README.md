@@ -14,6 +14,8 @@ The currently UI is a 3 page design, since column design running on bootstrap.
 - Will validate correct and incorrect user answers.
 - Keeps track of a leaderbard which updates on the fly.
 - Will allow for multiples uers using different browsers
+- The app doesnt handle browser interactions (back button, etc) very well.
+- Somethings we get a blow up related to encoding, happens sometimes but needs more investigation.
  
 
 ### Features Left to Implement
