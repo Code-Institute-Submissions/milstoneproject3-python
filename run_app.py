@@ -5,9 +5,11 @@ from flask import Flask, render_template,request, session, url_for, redirect, fl
 app = Flask(__name__)
 app.secret_key = ("this is super secret")
 
-# global variables
+# variables
 leader_list = [{"user":"Joe Blogs", "correct":"0", "incorrect":"0"}]
 user_sessions = []
+
+global random_riddle
 random_riddle = []
 
 """
