@@ -8,8 +8,6 @@ app.secret_key = ("this is super secret")
 # variables
 leader_list = [{"user":"Joe Blogs", "correct":"0", "incorrect":"0"}]
 user_sessions = []
-
-global random_riddle
 random_riddle = []
 
 """
@@ -128,9 +126,11 @@ def index():
 def riddles ():
     user_anwser = []
     score = ""
+    
     if request.method =="POST":
         user_anwser = request.form.get("user_input", "").replace(" ", "")
         
+        global random_riddle
         answer_to_check = random_riddle["answer"].replace(" ", "")
         
         username = session["username"]
@@ -139,7 +139,6 @@ def riddles ():
         
         return redirect(url_for("riddles"))
     
-    global random_riddle
     random_riddle = get_riddle()
     print("Generate new riddle {}".format(random_riddle))
     return render_template("riddles.html", page_title="Here are your riddles",  score = score, username=session["username"], SelectRiddle = random_riddle["riddle"], systemAnswer = random_riddle["answer"])
